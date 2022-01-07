@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/comics', ComicsController::class);
+Route::resource('/comics', ComicsController::class)->middleware(['auth']);
 
-Route::any('/comics/search', [ComicsController::class, 'search'])->name('comics.search');
+Route::any('/comics/search', [ComicsController::class, 'search'])->name('comics.search')->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
