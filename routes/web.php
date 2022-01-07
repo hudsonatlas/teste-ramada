@@ -19,4 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('comics', ComicsController::class);
+Route::resource('/comics', ComicsController::class);
+
+Route::any('/comics/search', [ComicsController::class, 'search'])->name('comics.search');
