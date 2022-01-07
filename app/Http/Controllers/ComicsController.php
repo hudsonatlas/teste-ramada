@@ -106,4 +106,14 @@ class ComicsController extends Controller
         return redirect()->route('comics.index')
             ->with('success', 'Quadrinhos excluido com sucesso');
     }
+
+    public function search(Request $request)
+    {
+        $comics = Comics::where('title', 'LIKE', "%{$request->search}%")
+                        ->orWhere('id', 'LIKE', "%{$request->search}%")
+                        ->paginate();
+
+
+        return view('comics.search', compact('comics'));
+    }
 }
