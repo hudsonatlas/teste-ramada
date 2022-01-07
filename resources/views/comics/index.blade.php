@@ -6,6 +6,11 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+
+    <div class="alert alert-success flex flex-row-reverse p-1">
+        <a href=" {{ route('comics.create') }}" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded" >Criar Quadrinhos</a>
+    </div>
+
     <div class="md:px-32 py-8 w-full">
         <div class="shadow overflow-hidden rounded border-b border-gray-200">
             <table class="min-w-full bg-white">

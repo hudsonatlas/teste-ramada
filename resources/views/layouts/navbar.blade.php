@@ -8,7 +8,7 @@
 			</div>
 			<div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
 				<div class="flex-shrink-0 flex items-center">
-					<h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Hudson Teste Ramada</h1>
+					<a href="{{ route('comics.index') }}" class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Hudson Teste Ramada</a>
 				</div>
 
 				<div class="flex border-2 rounded">
