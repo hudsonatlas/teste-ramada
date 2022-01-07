@@ -54,7 +54,13 @@ class ComicsController extends Controller
     {
         $comics = Comics::find($id);
 
-        return view('comics.show', compact('comics'));
+        if($comics) {
+            return view('comics.show', compact('comics'));
+        }
+
+        $erroMessanger = 'Esse quadrinho não existe';
+
+        return view('comics.error', compact('erroMessanger'));
     }
 
     /**
@@ -112,7 +118,6 @@ class ComicsController extends Controller
         $comics = Comics::where('title', 'LIKE', "%{$request->search}%")
                         ->orWhere('id', 'LIKE', "%{$request->search}%")
                         ->paginate();
-
 
         return view('comics.search', compact('comics'));
     }

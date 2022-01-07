@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ComicsController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +21,9 @@ Route::get('/', function () {
 Route::resource('/comics', ComicsController::class);
 
 Route::any('/comics/search', [ComicsController::class, 'search'])->name('comics.search');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
