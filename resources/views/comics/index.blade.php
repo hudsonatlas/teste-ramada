@@ -22,7 +22,7 @@
                         <th>EAN</th>
                         <th>Preços</th>
                         <th>Data</th>
-                        <th width="280px">Criadores</th>
+                        <th width="280px"></th>
                     </tr>
                 </thead>
                     @foreach ($comics as $comic)
@@ -34,7 +34,7 @@
                             <td class="text-left py-3 px-4">{{ $comic->ean }}</td>
                             <td class="text-left py-3 px-4">{{ $comic->price }}</td>
                             <td class="text-left py-3 px-4">{{ date_format($comic->created_at, 'j M Y') }}</td>
-                            <td class="text-left py-3 px-4">
+                            <td width="280px" class="text-left py-3 px-4">
                                 <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
                                     <a href="{{ route('comics.show', $comic->id) }}" title="show">
                                         <i class="fas fa-eye text-success  fa-lg"></i>
@@ -54,8 +54,6 @@
                         </tr>
                     @endforeach
             </table>
-
-            {!! $comics->links() !!}
 
         @endsection
 

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comics;
+use App\Services\Comics\ComicsService;
 use Illuminate\Http\Request;
+use App\Http\Requests\ComicsRequest;
 
 class ComicsController extends Controller
 {
+    protected $comicsService;
+
+    public function __construct(ComicsService $comicsService)
+    {
+        $this->comicsService = $comicsService;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\mixed
      */
     public function index()
     {
-        $comics = Comics::latest()->paginate(15);
+        $comics = $this->comicsService->getAllComics();
 
         return view('comics.index', compact('comics'))
             ->with('i', (request()->input('page', 1) - 1) * 15);
@@ -36,9 +44,9 @@ class ComicsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComicsRequest $request)
     {
-        Comics::create($request->all());
+        $this->comicsService->createNewComics($request->validated());
 
         return redirect()->route('comics.index')
             ->with('success', 'Quadrinhos criado com sucesso!');
@@ -52,7 +60,7 @@ class ComicsController extends Controller
      */
     public function show(int $id)
     {
-        $comics = Comics::find($id);
+        $comics = $this->comicsService->getComics($id);
 
         if($comics) {
             return view('comics.show', compact('comics'));
@@ -71,7 +79,7 @@ class ComicsController extends Controller
      */
     public function edit(int $id)
     {
-        $comics = Comics::find($id);
+        $comics = $this->comicsService->getComics($id);
 
         return view('comics.edit', compact('comics'));
     }
@@ -79,22 +87,16 @@ class ComicsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ComicsRequest  $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(ComicsRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required'
-        ]);
-        
-        $comics = Comics::find($id);
+        $this->comicsService->updateComics($id, $request->validated());
 
-        $comics->update($request->all());
-
-        return redirect()->route('comics.index')
-            ->with('success',  'Quadrinhos atualizado com sucesso');
+        return redirect()->route('comics.show', $id)
+            ->with('success', 'Quadrinhos Atualizado com sucesso!');
     }
 
     /**
@@ -105,9 +107,7 @@ class ComicsController extends Controller
      */
     public function destroy(int $id)
     {
-        $comics = Comics::find($id);
-
-        $comics->delete();
+        $this->comicsService->deleteComics($id);
 
         return redirect()->route('comics.index')
             ->with('success', 'Quadrinhos excluido com sucesso');
@@ -115,10 +115,7 @@ class ComicsController extends Controller
 
     public function search(Request $request)
     {
-        $comics = Comics::where('title', 'LIKE', "%{$request->search}%")
-                        ->orWhere('id', 'LIKE', "%{$request->search}%")
-                        ->paginate();
-
+        $comics = $this->comicsService->searchComics($request->search);
         return view('comics.search', compact('comics'));
     }
 }
