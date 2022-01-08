@@ -63,14 +63,18 @@ class MarvelApi extends Command
                 $comics = $response->object();
 
                 foreach ($comics->data->results as $results) {
+        
                     $this->comicsService->createNewComics([
                             'title' => $results->title,
                             'description' => $results->description,
-                            'ean' => 12345,
+                            'ean' => $results->ean?:0,
                             'prices' => $results->prices[0]->price,
                             'images' => $results->images[0]->path.'.'.$results->images[0]->extension
                     ]);
                 }
+            }
+            else {
+                return "Não existe dados para ser importado nesse momento";
             }
         }
     }

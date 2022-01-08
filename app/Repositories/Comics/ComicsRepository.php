@@ -15,7 +15,7 @@ class ComicsRepository implements ComicsRepositoryContract
 
     public function getAll(): mixed
     {
-        return $this->entity->all();
+        return $this->entity->paginate(15);
     }
 
     public function getComics(int $id): mixed
