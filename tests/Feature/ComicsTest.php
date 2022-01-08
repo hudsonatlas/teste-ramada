@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ComicsTest extends TestCase
@@ -16,7 +15,7 @@ class ComicsTest extends TestCase
     {
         $response = $this->get('/comics');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
     
     /**
@@ -37,7 +36,7 @@ class ComicsTest extends TestCase
 
         $response = $this->get('/comics/create');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
     
     /**
@@ -49,10 +48,10 @@ class ComicsTest extends TestCase
     {
         $response = $this->get('/comics/1');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
-        /**
+    /**
      * A basic test example.
      *
      * @return void
@@ -70,7 +69,7 @@ class ComicsTest extends TestCase
 
         $response = $this->get('/comics/create');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         $response = $this->patch('/comics/2', [
             'id' => 2,
@@ -101,6 +100,6 @@ class ComicsTest extends TestCase
     public function test_success_search()
     {
         $response = $this->post('/comics/search', [1]);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
