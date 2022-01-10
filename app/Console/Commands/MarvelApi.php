@@ -34,13 +34,12 @@ class MarvelApi extends Command
     {
         parent::__construct();
         $this->comicsService = $comicsService;
-
     }
 
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return string|null
      */
     public function handle()
     {
@@ -49,7 +48,6 @@ class MarvelApi extends Command
             $privateKey = 'bdec22259c4cf7fc40326683909763fcfa4a2269';
             $timestamp = time();
             $hash = md5($timestamp . $privateKey. $apikey);
-
             
             $response = Http::get('http://gateway.marvel.com/v1/public/comics', [
                     'ts' => $timestamp,
@@ -63,7 +61,6 @@ class MarvelApi extends Command
                 $comics = $response->object();
 
                 foreach ($comics->data->results as $results) {
-        
                     $this->comicsService->createNewComics([
                             'title' => $results->title,
                             'description' => $results->description,

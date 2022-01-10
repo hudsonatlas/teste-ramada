@@ -39,7 +39,7 @@
 
               <div class="col-span-6 sm:col-span-6 lg:col-span-6">
                 <label for="prices" class="block text-sm font-medium text-gray-700">Preço</label>
-                <input type="number" name="prices" id="prices" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="number" step="0.01" name="prices" id="prices" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
               <div class="col-span-6 sm:col-span-6 lg:col-span-6">

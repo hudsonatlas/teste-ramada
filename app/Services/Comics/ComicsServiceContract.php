@@ -9,36 +9,48 @@ namespace App\Services\Comics;
 interface ComicsServiceContract
 {
     /**
+     * get all the comics
+     * 
      * @return mixed
      */
     public function getAllComics();
 
     /**
-     * @param int $id
-     * @return array
+     * create a comics
+     * 
+     * @param array $data
+     * @return mixed
      */
     public function createNewComics(array $data);
 
     /**
-     * @param string $param
-     * @param array $data
-     * @return bool
+     * get the comics for id
+     * 
+     * @param string $identify
+     * @return mixed
      */
     public function getComics(string $identify);
 
     /**
-     * @param int $id
-     * @return bool
+     * update a comics
+     *
+     * @param string $identify
+     * @param array $data
+     * @return mixed
      */
     public function updateComics(string $identify, array $data);
 
     /**
-     * @param int $id
-     * @return bool
+     * delete a comics
+     * 
+     * @param string $identify
+     * @return mixed
      */
     public function deleteComics(string $identify);
 
     /**
+     * searches the comics for a specific term
+     * 
      * @param int $id
      * @return bool
      */
