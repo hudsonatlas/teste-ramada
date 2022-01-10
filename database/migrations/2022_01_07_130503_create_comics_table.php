@@ -17,7 +17,7 @@ class CreateComicsTable extends Migration
             $table->id();
             $table->string('title', 100);
             $table->text('description')->nullable();
-            $table->integer('ean')->nullable();
+            $table->string('ean', 100)->nullable();
             $table->decimal('prices', 10, 2)->nullable();
             $table->string('images')->nullable();
             $table->timestamps();

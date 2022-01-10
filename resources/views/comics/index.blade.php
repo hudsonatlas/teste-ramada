@@ -32,22 +32,22 @@
                             <td class="text-left py-3 px-4">{{ $comic->title }}</td>
                             <td class="text-left py-3 px-4">{{ $comic->description }}</td>
                             <td class="text-left py-3 px-4">{{ $comic->ean }}</td>
-                            <td class="text-left py-3 px-4">{{ $comic->price }}</td>
+                            <td class="text-left py-3 px-4">{{ $comic->prices }}</td>
                             <td class="text-left py-3 px-4">{{ date_format($comic->created_at, 'j M Y') }}</td>
                             <td width="280px" class="text-left py-3 px-4">
                                 <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
                                     <a href="{{ route('comics.show', $comic->id) }}" title="show">
-                                        <i class="fas fa-eye text-success  fa-lg"></i>
+                                        <i class="fas fa-eye text-success hover:text-gray-500 fa-lg"></i>
                                     </a>
 
                                     <a href="{{ route('comics.edit', $comic->id) }}">
-                                        <i class="fas fa-edit  fa-lg"></i>
+                                        <i class="fas fa-edit hover:text-gray-500 fa-lg"></i>
                                     </a>
                                     @csrf
                                     @method('DELETE')
 
                                     <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                                        <i class="fas fa-trash fa-lg text-danger"></i>
+                                        <i class="fas fa-trash hover:text-gray-500 fa-lg text-danger"></i>
                                     </button>
                                 </form>
                             </td>
@@ -55,5 +55,11 @@
                     @endforeach
             </table>
 
+            <div class="row">
+                <div class="col-md-12">
+                    {{ $comics->links('pagination::tailwind') }}
+                </div>
+            </div>
+        </div>
         @endsection
 

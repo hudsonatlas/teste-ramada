@@ -34,13 +34,12 @@ class MarvelApi extends Command
     {
         parent::__construct();
         $this->comicsService = $comicsService;
-
     }
 
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return string|null
      */
     public function handle()
     {
@@ -49,7 +48,6 @@ class MarvelApi extends Command
             $privateKey = 'bdec22259c4cf7fc40326683909763fcfa4a2269';
             $timestamp = time();
             $hash = md5($timestamp . $privateKey. $apikey);
-
             
             $response = Http::get('http://gateway.marvel.com/v1/public/comics', [
                     'ts' => $timestamp,
@@ -66,11 +64,14 @@ class MarvelApi extends Command
                     $this->comicsService->createNewComics([
                             'title' => $results->title,
                             'description' => $results->description,
-                            'ean' => 12345,
+                            'ean' => $results->ean?:0,
                             'prices' => $results->prices[0]->price,
                             'images' => $results->images[0]->path.'.'.$results->images[0]->extension
                     ]);
                 }
+            }
+            else {
+                return "Não existe dados para ser importado nesse momento";
             }
         }
     }

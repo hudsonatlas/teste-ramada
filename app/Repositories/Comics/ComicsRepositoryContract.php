@@ -9,43 +9,49 @@ namespace App\Repositories\Comics;
 interface ComicsRepositoryContract
 {
     /**
-     * @return armixedray
+     * get all the comics
+     * @return mixed
      */
     public function getAll(): mixed;
 
     /**
+     * get the comics for id
+     * 
      * @param int $id
-     * @return array
+     * @return mixed
      */
     public function getComics(int $id): mixed;
 
     /**
-     * @param string $param
+     * create a comics
+     * 
      * @param array $data
-     * @return bool
+     * @return mixed
      */
     public function createNewComics(array $data): mixed;
 
-     /**
+    /**
+     * update a comics
+     *
      * @param string $identify
      * @param array $data
-     * 
-     * @return bool
+     * @return mixed
      */
-    public function updateComics(string $identify, array $data);
+    public function updateComics(string $identify, array $data): mixed;
 
     /**
+     * delete a comics
+     *
      * @param int $id
-     * @return bool
+     * @return mixed
      */
     public function deleteComics(int $id): mixed;
 
     /**
+     * searches the comics for a specific term
+     * 
      * @param string $string
-     * @param array $searchFields
-     * @param int $limit
-     * @param array $orderBy
-     * @return array
+     * @return mixed
      */
     public function searchComics(string $string): mixed;
 }

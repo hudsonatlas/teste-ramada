@@ -13,28 +13,57 @@ class ComicsRepository implements ComicsRepositoryContract
         $this->entity = $comics;
     }
 
+    /**
+     * get all the comics
+     * @return mixed
+     */
     public function getAll(): mixed
     {
-        return $this->entity->all();
+        return $this->entity->paginate(15);
     }
 
+    /**
+     * get all the comics
+     * 
+     * @param int $id
+     * @return mixed
+     */
     public function getComics(int $id): mixed
     {
         return $this->entity->findOrFail($id);
     }
 
+    /**
+     * create a comics
+     * 
+     * @param array $data
+     * @return bool
+     */
     public function createNewComics(array $data): mixed
     {
         return $this->entity->create($data);
     }
 
-    public function updateComics(string $identify, array $data)
+    /**
+     * update a comics
+     *
+     * @param string $identify
+     * @param array $data
+     * @return mixed
+     */
+    public function updateComics(string $identify, array $data): mixed
     {
         $comics = $this->getComics($identify);
 
         return $comics->update($data);
     }
 
+    /**
+     * delete a comics
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function deleteComics(int $id): mixed
     {
         $comics = $this->getComics($id);
@@ -43,8 +72,9 @@ class ComicsRepository implements ComicsRepositoryContract
     }
 
     /**
+     * searches the comics for a specific term
      * @param string $string
-     * @return array
+     * @return mixed
      */
     public function searchComics(string $string): mixed
     {
